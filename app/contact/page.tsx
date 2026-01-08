@@ -121,9 +121,9 @@ export default function CompactContactPage() {
                 
                 <div className="space-y-6">
                   {[
-                    { label: 'Primary Mail', val: 'hello@redlix.com', icon: Mail },
-                    { label: 'Voice Line', val: '+1 (555) 000-0000', icon: Phone },
-                    { label: 'Base Ops', val: 'Global / NYC', icon: MapPin },
+                    { label: 'Primary Mail', val: 'support.ckrdatapoint@gmail.com', icon: Mail },
+                    { label: 'Voice Line', val: '+91 6304889509', icon: Phone },
+                    { label: 'Base Ops', val: 'Global / HYD', icon: MapPin },
                   ].map((node, i) => (
                     <div key={i} className="flex gap-4 group cursor-pointer">
                       <div className="w-8 h-8 border border-gray-200 flex items-center justify-center shrink-0 group-hover:bg-black group-hover:text-white transition-all">
@@ -144,7 +144,7 @@ export default function CompactContactPage() {
                   <span className="text-[9px] font-black uppercase tracking-widest text-[#ff0000]">Availability</span>
                 </div>
                 <p className="text-xs text-white font-medium leading-relaxed opacity-80">
-                  We are currently accepting new high-impact projects for Q1 2025. Responses guaranteed within 24 hours.
+                  We are currently accepting new high-impact projects for Q1 2026. Responses guaranteed within 24 hours.
                 </p>
                 <div className="mt-6 flex items-center gap-2 text-[9px] font-black uppercase tracking-widest">
                    <Zap size={10} fill="#ff0000" stroke="#ff0000" />
