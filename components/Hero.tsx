@@ -5,146 +5,165 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Globe, Zap } from 'lucide-react';
 
-// Single image reference
 const heroImage = "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80";
-
-// Tech stack details
-const techStack = ['REACT', 'NEXT.JS', 'TYPESCRIPT', 'NODE.JS', 'TAILWIND', 'POSTGRESQL'];
-
-// Trusted Client Avatars
+const techStack = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'PostgreSQL'];
 const clientAvatars = [
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100&h=100",
-  "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=100&h=100",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100&h=100"
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFn4R1C2f_1L0Qenfy1mzZpmpPyTetzjNhA&s",
+
+  "https://dhanushh12.netlify.app/lovable-uploads/8840dc96-84cb-4c04-8605-2a74f585b88b.png"
 ];
 
 export default function CompactStaticSlantHero() {
   const { scrollY } = useScroll();
-  const yText = useTransform(scrollY, [0, 500], [0, 80]);
-  const yImage = useTransform(scrollY, [0, 500], [0, -40]);
+  
+  // Subtle parallax
+  const yText = useTransform(scrollY, [0, 500], [0, 60]);
+  const yImage = useTransform(scrollY, [0, 500], [0, -30]);
+  const ySlant = useTransform(scrollY, [0, 500], [0, -15]);
 
   return (
-    <section className="relative pt-32 pb-16 overflow-hidden bg-white selection:bg-[#ff0000] selection:text-white border-b border-gray-100">
+    <section className="relative flex items-center pt-24 md:pt-32 lg:pt-36 pb-12 overflow-hidden bg-white selection:bg-[#ff0000] selection:text-white border-b border-gray-50">
       
       {/* 1. BACKGROUND WATERMARK */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000003_1px,transparent_1px),linear-gradient(to_bottom,#00000003_1px,transparent_1px)] bg-[size:32px_32px]" />
-        
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000003_1px,transparent_1px),linear-gradient(to_bottom,#00000003_1px,transparent_1px)] bg-[size:40px_40px]" />
         <motion.div 
           style={{ y: yText, opacity: 0.02 }}
-          className="absolute top-10 -left-10 text-[18vw] font-black tracking-tighter text-black select-none italic"
+          className="absolute top-10 -left-10 text-[18vw] font-black tracking-tighter text-black select-none italic leading-none"
         >
           ENGINEER
         </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* 2. TEXT CONTENT (Left 7 Columns) */}
-          <div className="lg:col-span-7 relative z-20">
-            {/* Status Badge */}
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex items-center gap-2 px-2 py-0.5 bg-black text-white text-[8px] font-black uppercase tracking-[0.3em]">
-                < Zap size={10} className="text-[#ff0000]" />
-                Ready to build
+          {/* 2. TEXT CONTENT */}
+          <div className="lg:col-span-7 relative z-30 text-center lg:text-left">
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="flex items-center justify-center lg:justify-start gap-3 mb-6"
+            >
+              <div className="flex items-center gap-2 px-2 py-0.5 bg-black text-white text-[9px] font-black uppercase tracking-[0.2em]">
+                <Zap size={10} className="text-[#ff0000] fill-[#ff0000]" />
+                Available Now
               </div>
-              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
+              <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
                 <Globe size={10} /> Working Globally
               </span>
-            </div>
+            </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl md:text-7xl font-black text-black leading-[0.85] tracking-tighter mb-6"
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black leading-[1.1] tracking-tight mb-6"
             >
-              BETTER APPS<span className="text-[#ff0000]">.</span> <br />
-              <span className="text-[#ff0000]">FASTER</span> GROWTH<span className="text-[#ff0000]">.</span>
+              Build <span className="text-[#ff0000]">faster</span>.<br />
+              Scale with confidence.
             </motion.h1>
 
-            <div className="flex flex-col gap-8">
-              <p className="text-lg text-gray-500 font-medium max-w-md leading-snug">
-                We build <span className="text-black">custom software and websites</span> that are fast, reliable, and easy for your customers to use.
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="space-y-8"
+            >
+              <p className="text-base sm:text-lg text-gray-500 font-medium max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                We design and engineer <span className="text-black font-semibold underline decoration-[#ff0000]/30 decoration-2 underline-offset-4">high-performance digital products</span> for forward-thinking brands and startups.
               </p>
 
-              <div className="flex items-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
                 <Link
                   href="/contact"
-                  className="group relative px-10 py-5 bg-black text-white overflow-hidden transition-all shadow-xl"
+                  className="group relative px-8 py-4 bg-black text-white overflow-hidden transition-all shadow-lg w-full sm:w-auto"
                 >
-                  <div className="absolute inset-0 w-0 bg-[#ff0000] transition-all duration-300 group-hover:w-full" />
+                  <div className="absolute inset-0 w-0 bg-[#ff0000] transition-all duration-400 ease-out group-hover:w-full" />
                   <span className="relative z-10 flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em]">
-                    Start a project <ArrowRight size={16} />
+                    Start your project <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Link>
                 
-                <div className="hidden sm:flex items-center gap-3 border-l border-gray-100 pl-6">
+                <div className="flex items-center gap-3 pl-2">
                   <div className="flex -space-x-2">
                     {clientAvatars.map((src, i) => (
                       <img 
                         key={i} 
                         src={src} 
-                        alt="Client"
-                        className="w-7 h-7 rounded-full object-cover border-2 border-white ring-1 ring-gray-100" 
+                        alt="Testimonial client"
+                        className="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm" 
                       />
                     ))}
                   </div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-gray-400">
-                    Trusted by <br /><span className="text-black">50+ clients</span>
-                  </span>
+                  <div className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">
+                    Trusted by <span className="text-black">50+ founders</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          {/* 3. SLANTING IMAGE (Right 5 Columns) */}
-          <div className="lg:col-span-5 relative h-[400px] lg:h-[500px] mt-8 lg:mt-0">
+          {/* 3. THE RED SLANT IMAGE SECTION */}
+          <div className="hidden lg:block lg:col-span-5 relative h-[380px] lg:h-[480px]">
+            
+            {/* The Background Red Slant (Structural) */}
             <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
+              style={{ 
+                clipPath: 'polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                y: ySlant 
+              }}
+              className="absolute inset-0 bg-[#ff0000] translate-x-3 translate-y-3 z-10 opacity-100"
+            />
+
+            {/* The Image Container */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8 }}
               style={{ 
-                clipPath: 'polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                clipPath: 'polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%)',
                 y: yImage 
               }}
-              className="relative w-full h-full bg-gray-100 overflow-hidden group shadow-2xl"
+              className="relative w-full h-full bg-gray-100 overflow-hidden group z-20 shadow-2xl"
             >
               <motion.img 
                 src={heroImage} 
                 initial={{ scale: 1.1 }}
-                animate={{ scale: 1.05 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                alt="Development Showcase" 
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.5 }}
+                alt="Development" 
+                className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-              <div className="absolute top-6 right-6 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black tracking-widest uppercase z-10">
-                Phase: V2.0.4
+              
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+              
+              {/* Corner Label */}
+              <div className="absolute top-6 right-6 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black tracking-widest uppercase">
+                Product v2.0
               </div>
             </motion.div>
 
+            {/* Accent Line */}
             <div 
-              className="absolute top-0 w-[2px] h-full bg-[#ff0000] z-30 hidden lg:block"
-              style={{ 
-                left: '20%', 
-                transform: 'skewX(-11deg)', 
-                transformOrigin: 'top' 
-              }}
+              className="absolute top-0 w-[1.5px] h-full bg-[#ff0000] z-30 hidden lg:block shadow-[0_0_15px_rgba(255,0,0,0.5)]"
+              style={{ left: '15.2%', transform: 'skewX(-9deg)', transformOrigin: 'top' }}
             />
-          </div>
+          </div> 
         </div>
 
         {/* 4. TECH STACK TICKER */}
-        <div className="mt-12 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="mt-12 lg:mt-16 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
            <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Core Technology Stack</span>
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Technology Stack</span>
            </div>
-           <div className="flex flex-wrap justify-center gap-8 grayscale opacity-30 hover:opacity-100 transition-all duration-500">
+           
+           <div className="flex flex-wrap justify-center gap-x-10 gap-y-2">
              {techStack.map((tech) => (
-               <span key={tech} className="text-[10px] font-black tracking-tighter text-black italic">{tech}</span>
+               <span key={tech} className="text-[11px] font-bold text-gray-300 hover:text-black transition-colors cursor-default">
+                 {tech}
+               </span>
              ))}
            </div>
         </div>
