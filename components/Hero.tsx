@@ -9,7 +9,6 @@ const heroImage = "https://images.unsplash.com/photo-1551434678-e076c223a692?aut
 const techStack = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind', 'PostgreSQL'];
 const clientAvatars = [
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFn4R1C2f_1L0Qenfy1mzZpmpPyTetzjNhA&s",
-
   "https://dhanushh12.netlify.app/lovable-uploads/8840dc96-84cb-4c04-8605-2a74f585b88b.png"
 ];
 
@@ -22,28 +21,30 @@ export default function CompactStaticSlantHero() {
   const ySlant = useTransform(scrollY, [0, 500], [0, -15]);
 
   return (
-    <section className="relative flex items-center pt-24 md:pt-32 lg:pt-36 pb-12 overflow-hidden bg-white selection:bg-[#ff0000] selection:text-white border-b border-gray-50">
+    /* Changed pt-20 to pt-28 for mobile to clear fixed navbars */
+    <section className="relative flex items-center pt-28 md:pt-32 lg:pt-36 pb-8 md:pb-12 overflow-hidden bg-white selection:bg-[#ff0000] selection:text-white border-b border-gray-50">
       
       {/* 1. BACKGROUND WATERMARK */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000003_1px,transparent_1px),linear-gradient(to_bottom,#00000003_1px,transparent_1px)] bg-[size:40px_40px]" />
         <motion.div 
           style={{ y: yText, opacity: 0.02 }}
-          className="absolute top-10 -left-10 text-[18vw] font-black tracking-tighter text-black select-none italic leading-none"
+          /* Lowered top-10 to top-20 to avoid navbar overlap */
+          className="absolute top-20 -left-10 text-[18vw] font-black tracking-tighter text-black select-none italic leading-none"
         >
           ENGINEER
         </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-start lg:items-center">
           
-          {/* 2. TEXT CONTENT */}
-          <div className="lg:col-span-7 relative z-30 text-center lg:text-left">
+          {/* 2. TEXT CONTENT (Left Aligned) */}
+          <div className="lg:col-span-7 relative z-30 text-left flex flex-col items-start">
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center lg:justify-start gap-3 mb-6"
+              className="flex items-center justify-start gap-3 mb-5 md:mb-6"
             >
               <div className="flex items-center gap-2 px-2 py-0.5 bg-black text-white text-[9px] font-black uppercase tracking-[0.2em]">
                 <Zap size={10} className="text-[#ff0000] fill-[#ff0000]" />
@@ -58,7 +59,7 @@ export default function CompactStaticSlantHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black leading-[1.1] tracking-tight mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-black leading-[1.1] tracking-tight mb-5 md:mb-6 text-left"
             >
               Build <span className="text-[#ff0000]">faster</span>.<br />
               Scale with confidence.
@@ -68,16 +69,16 @@ export default function CompactStaticSlantHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="space-y-8"
+              className="space-y-6 md:space-y-8 w-full flex flex-col items-start"
             >
-              <p className="text-base sm:text-lg text-gray-500 font-medium max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-500 font-medium max-w-lg leading-relaxed text-left">
                 We design and engineer <span className="text-black font-semibold underline decoration-[#ff0000]/30 decoration-2 underline-offset-4">high-performance digital products</span> for forward-thinking brands and startups.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-6 w-full">
                 <Link
                   href="/contact"
-                  className="group relative px-8 py-4 bg-black text-white overflow-hidden transition-all shadow-lg w-full sm:w-auto"
+                  className="group relative px-8 py-4 bg-black text-white overflow-hidden transition-all shadow-lg w-fit"
                 >
                   <div className="absolute inset-0 w-0 bg-[#ff0000] transition-all duration-400 ease-out group-hover:w-full" />
                   <span className="relative z-10 flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em]">
@@ -85,7 +86,7 @@ export default function CompactStaticSlantHero() {
                   </span>
                 </Link>
                 
-                <div className="flex items-center gap-3 pl-2">
+                <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
                     {clientAvatars.map((src, i) => (
                       <img 
@@ -104,10 +105,8 @@ export default function CompactStaticSlantHero() {
             </motion.div>
           </div>
 
-          {/* 3. THE RED SLANT IMAGE SECTION */}
+          {/* 3. THE RED SLANT IMAGE SECTION (Hidden on mobile) */}
           <div className="hidden lg:block lg:col-span-5 relative h-[380px] lg:h-[480px]">
-            
-            {/* The Background Red Slant (Structural) */}
             <motion.div 
               style={{ 
                 clipPath: 'polygon(15% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -115,8 +114,6 @@ export default function CompactStaticSlantHero() {
               }}
               className="absolute inset-0 bg-[#ff0000] translate-x-3 translate-y-3 z-10 opacity-100"
             />
-
-            {/* The Image Container */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -135,16 +132,11 @@ export default function CompactStaticSlantHero() {
                 alt="Development" 
                 className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
               />
-              
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-              
-              {/* Corner Label */}
               <div className="absolute top-6 right-6 px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-black tracking-widest uppercase">
                 Product v2.0
               </div>
             </motion.div>
-
-            {/* Accent Line */}
             <div 
               className="absolute top-0 w-[1.5px] h-full bg-[#ff0000] z-30 hidden lg:block shadow-[0_0_15px_rgba(255,0,0,0.5)]"
               style={{ left: '15.2%', transform: 'skewX(-9deg)', transformOrigin: 'top' }}
@@ -153,13 +145,13 @@ export default function CompactStaticSlantHero() {
         </div>
 
         {/* 4. TECH STACK TICKER */}
-        <div className="mt-12 lg:mt-16 pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="mt-10 md:mt-12 lg:mt-16 pt-5 md:pt-6 border-t border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-5 md:gap-6">
            <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
               <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Technology Stack</span>
            </div>
            
-           <div className="flex flex-wrap justify-center gap-x-10 gap-y-2">
+           <div className="flex flex-wrap justify-start gap-x-8 gap-y-3">
              {techStack.map((tech) => (
                <span key={tech} className="text-[11px] font-bold text-gray-300 hover:text-black transition-colors cursor-default">
                  {tech}
