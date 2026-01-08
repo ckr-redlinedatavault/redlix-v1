@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, ShieldCheck, Globe, Layout, Cpu } from 'lucide-react';
+import { X, ArrowUpRight, AppWindow } from 'lucide-react'; // Swapped Globe for AppWindow
 
-export default function CreativeRedNavbar() {
+export default function CleanRedNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -24,156 +24,124 @@ export default function CreativeRedNavbar() {
 
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 selection:bg-black selection:text-white ${
-        scrolled ? 'py-3' : 'py-6'
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        scrolled ? 'py-0' : 'py-2'
       }`}
     >
-      {/* BACKGROUND BAR WITH SCANNING EFFECT */}
-      <div className={`absolute inset-0 bg-[#ff0000] transition-all duration-500 overflow-hidden ${scrolled ? 'shadow-2xl' : ''}`}>
-        {/* Subtle Grid Overlay */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
-        
-        {/* The "Scanning" Light Line */}
-        <motion.div 
-          animate={{ x: ['-100%', '200%'] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 2 }}
-          className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"
-        />
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 bg-[#FF0000]">
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-white/10" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="flex justify-between items-center">
+      <div className="max-w-[1440px] mx-auto px-6 relative z-10">
+        <div className={`flex justify-between items-center transition-all duration-500 ${
+          scrolled ? 'h-12' : 'h-14'
+        }`}>
           
-          {/* 1. BRAND LOGO - Magnetic Breathing Effect */}
-          <Link href="/" className="relative group flex items-center gap-2">
-             <motion.div 
-               animate={{ opacity: [1, 0.5, 1] }}
-               transition={{ duration: 2, repeat: Infinity }}
-               className="w-[3px] h-8 bg-white" 
-             />
-             <span 
-               style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}
-               className="text-2xl font-black tracking-tighter text-white uppercase flex items-center"
-             >
-               Redlix<span className="text-black group-hover:text-white transition-colors duration-500">.</span>
+          {/* 1. BRAND */}
+          <Link href="/" className="flex items-center gap-2 group">
+             <span className="text-xl font-black tracking-tighter text-white uppercase italic">
+               REDLIX<span className="text-black">.</span>
              </span>
           </Link>
 
-          {/* 2. CENTER PIECE - Live System Status (Creative Detail) */}
-          <div className="hidden xl:flex items-center gap-4 px-4 py-1.5 border border-white/20 rounded-full bg-black/5 backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-            </span>
-            <span className="text-[8px] font-black uppercase tracking-[0.4em] text-white/80">System: Operational</span>
-          </div>
-
-          {/* 3. DESKTOP NAV - Bracket Hover Logic */}
+          {/* 2. DESKTOP NAV */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="px-5 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70 hover:text-white transition-all relative group"
+                className="px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 hover:text-white transition-colors relative"
               >
-                <span className="absolute left-2 opacity-0 group-hover:opacity-100 group-hover:-left-1 transition-all duration-300 text-black">[</span>
                 {link.name}
-                <span className="absolute right-2 opacity-0 group-hover:opacity-100 group-hover:-right-1 transition-all duration-300 text-black">]</span>
               </Link>
             ))}
           </div>
 
-          {/* 4. ACTION SECTION */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* CLIENT WINDOW - Glass Outline */}
+          {/* 3. ACTION SECTION */}
+          <div className="hidden lg:flex items-center gap-0">
+            {/* NEW: Client Window Button */}
             <Link
               href="/client-window"
-              className="px-5 py-2.5 border border-white/30 text-white text-[9px] font-black uppercase tracking-[0.2em] backdrop-blur-md hover:bg-white hover:text-[#ff0000] transition-all duration-500 flex items-center gap-2 group"
+              className="h-8 px-4 text-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 border border-transparent hover:border-white/20 transition-all"
             >
-              <Layout size={12} className="group-hover:rotate-12 transition-transform" />
+              <AppWindow size={14} />
               Client Window
             </Link>
 
-            {/* CONSULTATION - High Impact Solid */}
             <Link
               href="/contact"
-              className="relative px-6 py-2.5 bg-black text-white text-[9px] font-black uppercase tracking-[0.2em] overflow-hidden group shadow-xl"
+              className="h-9 px-6 bg-black text-white text-[10px] font-bold uppercase tracking-[0.2em] flex items-center group relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              <span className="relative z-10 group-hover:text-black flex items-center gap-2">
-                Consultation
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              <span className="relative z-10 flex items-center gap-2">
+                Get Started
+                <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
             </Link>
           </div>
 
-          {/* 5. MOBILE TOGGLE */}
+          {/* MOBILE TOGGLE - Two Lines instead of Three */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-white bg-black/10 rounded-full"
+              className="w-8 h-8 flex flex-col items-end justify-center gap-1.5 text-white group"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? (
+                <X size={24} />
+              ) : (
+                <>
+                  <span className="w-6 h-[2px] bg-white transition-all group-hover:w-4" />
+                  <span className="w-4 h-[2px] bg-white transition-all group-hover:w-6" />
+                </>
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* 6. MOBILE MENU OVERLAY */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed inset-0 z-[110] bg-[#ff0000] md:hidden flex flex-col p-8"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-[110] bg-white md:hidden flex flex-col"
           >
-            <div className="flex justify-between items-center mb-20">
-               <div className="flex items-center gap-2">
-                  <div className="w-[3px] h-8 bg-white" />
-                  <span className="text-2xl font-black tracking-tighter text-white uppercase">Redlix<span className="text-black">.</span></span>
-               </div>
-               <button onClick={() => setIsMenuOpen(false)} className="w-12 h-12 border border-white/20 flex items-center justify-center rounded-full text-white"><X size={28} /></button>
+            <div className="p-6 flex justify-between items-center border-b border-gray-100">
+               <span className="text-xl font-black text-[#FF0000] italic uppercase">Redlix.</span>
+               <button onClick={() => setIsMenuOpen(false)} className="text-black"><X size={28} /></button>
             </div>
 
-            <div className="flex flex-col gap-8">
-              {navLinks.map((link, i) => (
-                <motion.div
+            <div className="flex flex-col p-10 gap-6">
+              {navLinks.map((link) => (
+                <Link
                   key={link.name}
-                  initial={{ x: 50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: i * 0.1 }}
+                  href={link.href}
+                  className="text-4xl font-black text-black hover:text-[#FF0000] transition-colors uppercase italic"
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <Link
-                    href={link.href}
-                    className="text-6xl font-black text-white/40 hover:text-white transition-all tracking-tighter uppercase italic block"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
+                  {link.name}
+                </Link>
               ))}
-            </div>
-            
-            <div className="mt-auto space-y-4">
-               <div className="flex items-center gap-2 text-white/50 text-[10px] font-bold uppercase tracking-widest mb-4">
-                 <Cpu size={14} />
-                 <span>Terminal V2.4.0 Live</span>
-               </div>
-               <Link
-                href="/client-window"
-                className="w-full flex justify-center items-center border border-white/30 text-white p-5 font-black uppercase tracking-widest text-xs"
+              {/* Added Client Window to Mobile Menu too */}
+              <Link
+                href="/client-portal"
+                className="text-xl font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2 mt-4"
                 onClick={() => setIsMenuOpen(false)}
               >
+                <AppWindow size={18} />
                 Client Window
               </Link>
+            </div>
+            
+            <div className="mt-auto p-10">
               <Link
                 href="/contact"
-                className="w-full flex justify-between items-center bg-black text-white p-6 font-black uppercase tracking-widest text-sm"
+                className="w-full bg-[#FF0000] text-white p-6 font-black uppercase tracking-widest text-center block"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Start A Project <ArrowRight size={24} />
+                Start A Project
               </Link>
             </div>
           </motion.div>
